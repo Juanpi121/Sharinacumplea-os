@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Feliz Cumpleaños Sharina 💖</title>
+
+<style>
+body {
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(135deg, #ff6ec4, #7873f5);
+  font-family: Arial, sans-serif;
+  color: white;
+  text-align: center;
+  overflow-x: hidden;
+}
+
+h1 {
+  margin-top: 40px;
+  font-size: 40px;
+}
+
+p {
+  font-size: 20px;
+  margin: 20px;
+}
+
+#contador {
+  font-size: 26px;
+  margin-top: 20px;
+  background: rgba(255,255,255,0.2);
+  padding: 15px;
+  border-radius: 20px;
+  display: inline-block;
+}
+
+/* GALERÍA */
+.galeria {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  flex-wrap: wrap;
+  margin: 30px;
+  padding: 0 10px;
+}
+
+.galeria img {
+  width: 200px;
+  height: 250px;
+  object-fit: cover;
+  border-radius: 20px;
+  transition: 0.3s;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+.galeria img:hover {
+  transform: scale(1.05);
+}
+
+/* Botón */
+button {
+  padding: 15px 30px;
+  border: none;
+  background: white;
+  color: #ff4da6;
+  border-radius: 25px;
+  cursor: pointer;
+  font-size: 18px;
+  margin-top: 20px;
+}
+
+/* Corazones */
+.corazon {
+  position: absolute;
+  color: pink;
+  animation: caer 6s linear infinite;
+  font-size: 20px;
+}
+
+/* Fotos cayendo */
+.foto-caer {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 8px;
+  animation: caer 6s linear infinite;
+}
+
+@keyframes caer {
+  0% { transform: translateY(-10%); }
+  100% { transform: translateY(100vh); }
+}
+
+/* RESPONSIVE CELULAR */
+@media (max-width: 600px) {
+  h1 {
+    font-size: 26px;
+    margin-top: 25px;
+  }
+
+  p {
+    font-size: 16px;
+    margin: 15px;
+  }
+
+  #contador {
+    font-size: 18px;
+    padding: 10px;
+  }
+
+  .galeria img {
+    width: 140px;
+    height: 180px;
+  }
+
+  button {
+    font-size: 16px;
+    padding: 12px 20px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<h1>🎂 Feliz Cumpleaños Sharina 💖</h1>
+
+<p>
+Eres lo mejor que me ha pasado 💕<br>
+Gracias por estar en mi vida ❤️
+</p>
+
+<div id="contador"></div>
+
+<div class="galeria">
+  <img src="WhatsApp Image 2026-03-21 at 10.31.05 PM.jpeg">
+  <img src="WhatsApp Image 2026-03-21 at 10.31.55 PM (1).jpeg">
+  <img src="WhatsApp Image 2026-03-21 at 10.32.36 PM.jpeg">
+</div>
+
+<button onclick="mostrarMensaje()">Haz clic aquí 💌</button>
+<p id="mensaje"></p>
+
+<script>
+// Contador
+const fechaCumple = new Date("April 6, 2026 00:00:00").getTime();
+
+const intervalo = setInterval(() => {
+  const ahora = new Date().getTime();
+  const diferencia = fechaCumple - ahora;
+
+  if (diferencia <= 0) {
+    clearInterval(intervalo);
+    document.getElementById("contador").innerHTML =
+      "🎉 ¡Feliz Cumpleaños Sharina! 💖<br>Te amo muchísimo ❤️";
+    return;
+  }
+
+  const dias = Math.floor(diferencia / (1000 * 60 * 60 * 24));
+  const horas = Math.floor((diferencia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  const minutos = Math.floor((diferencia % (1000 * 60 * 60)) / (1000 * 60));
+  const segundos = Math.floor((diferencia % (1000 * 60)) / 1000);
+
+  document.getElementById("contador").innerHTML =
+    `⏳ ${dias}d ${horas}h ${minutos}m ${segundos}s`;
+}, 1000);
+
+// Mensaje
+function mostrarMensaje() {
+  document.getElementById("mensaje").innerText =
+    "Sharina 💖 gracias por existir, eres mi todo ❤️";
+}
+
+// Fotos que caerán
+const fotos = [
+  "WhatsApp Image 2026-03-21 at 10.31.05 PM.jpeg",
+  "WhatsApp Image 2026-03-21 at 10.31.55 PM (1).jpeg",
+  "WhatsApp Image 2026-03-21 at 10.32.36 PM.jpeg"
+];
+
+// Corazones y fotos cayendo
+function crearElemento() {
+  const random = Math.random();
+
+  if (random < 0.5) {
+    const corazon = document.createElement("div");
+    corazon.classList.add("corazon");
+    corazon.innerText = "💖";
+    corazon.style.left = Math.random() * 100 + "vw";
+    document.body.appendChild(corazon);
+    setTimeout(() => corazon.remove(), 6000);
+  } else {
+    const foto = document.createElement("img");
+    foto.src = fotos[Math.floor(Math.random() * fotos.length)];
+    foto.classList.add("foto-caer");
+    foto.style.left = Math.random() * 100 + "vw";
+    document.body.appendChild(foto);
+    setTimeout(() => foto.remove(), 6000);
+  }
+}
+
+setInterval(crearElemento, 500);
+</script>
+
+</body>
+</html>
